@@ -55,11 +55,15 @@ int main(void) {
         break;
       case debounce_release:
         // The button has been released.
-        // 
+        // Disable the button interrupt.
+
+
         for (int i = 0; i < 10; i++) {
           // TODO: Send i to seven segment display
           delayMs(1000);
         }
+
+        // Enable the button interrupt
 
         // Wait for the noisy 'debounce' state to pass. Then, we are awaiting press.
         delayMs(1);
