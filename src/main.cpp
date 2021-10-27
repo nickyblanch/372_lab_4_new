@@ -36,7 +36,12 @@ volatile stateEnum button_state = wait_press; // ASSUMING WE BEGIN IN A STATE WH
 //----------------------------------------------------------------------//
 // Main function
 int main(void) {
+
+  // VARIABLES
   unsigned int result = 0;
+
+  // HARDWARE INITIALIZATIONS
+  initSwitchPD0();
 
   while(1){
 
@@ -55,8 +60,9 @@ int main(void) {
         break;
       case debounce_release:
         // The button has been released.
-        // Disable the button interrupt.
 
+        // Disable the button interrupt.
+        EIMSK &= ~(1 << INT0);   // Disable INT0 in the EIMSK register
 
         for (int i = 0; i < 10; i++) {
           // TODO: Send i to seven segment display
@@ -64,6 +70,7 @@ int main(void) {
         }
 
         // Enable the button interrupt
+        EIMSK |= (1 << INT0);   // Enable INT0 in the EIMSK register
 
         // Wait for the noisy 'debounce' state to pass. Then, we are awaiting press.
         delayMs(1);
@@ -72,7 +79,7 @@ int main(void) {
     }
 
     
-    // read in ADCL first then read ADCH
+    // read in ADCL first then read ADCH (low and high bits of ADC value)
     result = ADCL;
     result += ((unsigned int) ADCH) << 8;
     Serial.println(result);
@@ -83,7 +90,7 @@ int main(void) {
 //----------------------------------------------------------------------//
 // Interrupt
 
-ISR (PCINT0_vect) {
+ISR (INT0_vect) {
   // When the interrupt flag is triggered:
 
   if (button_state == wait_press) {

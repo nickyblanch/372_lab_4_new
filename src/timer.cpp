@@ -1,9 +1,5 @@
 #include "timer.h"
 
-
-
-
-
 void initTimer0(){
 //set waverform generations bits to CTC mode
 //WGM13=0; WGM12=1; WGM11=0; WGM10=0;
@@ -12,22 +8,17 @@ TCCR0A|=(1<<WGM01);
 TCCR0B&=~(1<<WGM02);
 
 
-
 TCCR0B |= (1 << CS01) | (1 << CS00); // Sets the prescalerto 64
 
 OCR0A = 250;
 
-
-
-
-
-
-
-
 }
+
+
+
 void initTimer1(){
 
-    // make timer for 1 second 
+// make timer for 1 second 
 
 //set waverform generations bits to CTC mode
 //WGM13=0; WGM12=1; WGM11=0; WGM10=0;
@@ -45,12 +36,10 @@ TCCR1B&=~(1<<CS11);
 
 OCR1A=39062;
 
-
-
-
-
-
 }
+
+
+
 void delay_Ms(unsigned int delay){
 
     unsigned int delayCnt= 0;TCNT0 = 0;
@@ -58,15 +47,16 @@ void delay_Ms(unsigned int delay){
     TIFR0 |= (1 << OCF0A);// set compare flag to start timer
     while (delayCnt< delay) {
         if (TIFR0 & (1 << OCF0A)) {
-        //increment only while the flag is set (timer reached maxval= OCR0A)
-        delayCnt++;
-        TIFR0 |= (1 << OCF0A);
-        //re-start timer. will go to 0 before reaching the if statement above
+            //increment only while the flag is set (timer reached maxval= OCR0A)
+            delayCnt++;
+            TIFR0 |= (1 << OCF0A);
+            TCNT0 = 0;
+            //re-start timer. will go to 0 before reaching the if statement above
         }
     }
-
-
 }
+
+
 
 void delay_s(unsigned int delay){
 unsigned int delayCnt= 0;TCNT1 = 0;
@@ -74,11 +64,11 @@ unsigned int delayCnt= 0;TCNT1 = 0;
     TIFR1 |= (1 << OCF1A);// set compare flag to start timer
     while (delayCnt< delay) {
         if (TIFR1 & (1 << OCF1A)) {
-        //increment only while the flag is set (timer reached maxval= OCR1A)
-        delayCnt++;
-        TIFR1 |= (1 << OCF1A);
-        TCNT1=0;
-        //re-start timer. will go to 0 before reaching the if statement above
+            //increment only while the flag is set (timer reached maxval= OCR1A)
+            delayCnt++;
+            TIFR1 |= (1 << OCF1A);
+            TCNT1=0;
+            //re-start timer. will go to 0 before reaching the if statement above
         }
     }
 }

@@ -1,5 +1,5 @@
 // Author: Nicolas Blanchard,
-// Net ID: nickyblanch,
+// Net ID: nickyblanch
 // Date: 10/25/21
 // Assignment: Lab 4
 // Description: This file implements the initialization of an external
@@ -22,6 +22,8 @@ void initSwitchPD0(){
     PORTB |= (1 << PORTD0); // Enable pullup resistor by writing 1 to the port.
 
     // Pin-Change Interrupts must be enabled for pin PD0
-    PCICR |= (1 << PCIE0);   // Enable PCINT for 0-7
-    PCMSK0 |= (1 << PCINT3); // Enable PCINT3 specifically in the pin change mask register 0
+    // We basically want to use INT0 as a pin change interrupt
+    EICRA |= (1 << ISC00); EICRA &= (1 << ISC01); // Set INT0 to trigger asynchronously on any edge (high or low)
+
+    EIMSK |= (1 << INT0);   // Enable INT0 in the EIMSK register
 }
