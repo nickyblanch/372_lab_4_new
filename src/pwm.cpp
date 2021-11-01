@@ -49,10 +49,10 @@ void initPWMTimer3() {
     DDRB |= (1<<PORTE3);
     DDRB |= (1<< PORTB7);
  
-    //set for non inverting timer
+    //set for inverting timer
 
-    TCCR3A |= (1<<COM3A1);
-    TCCR3A &= ~(1<<COM3A0);
+    TCCR3A |= (1<<COM3A0);
+    TCCR3A &= ~(1<<COM3A1);
     
 
 
@@ -73,9 +73,12 @@ void initPWMTimer3() {
 //initialize the output compare register to ****
 OCR3A =251;
 
-// set the duty cycle to 75%
 
-OCR3C=600;
+
+}
+void changeDutyCycle(unsigned int adc){
+OCR3A=adc;
+OCR4A=adc;
 
 }
 
