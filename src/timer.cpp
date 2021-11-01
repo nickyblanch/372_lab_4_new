@@ -7,7 +7,6 @@ TCCR0A&=~(1<<WGM00);
 TCCR0A|=(1<<WGM01);
 TCCR0B&=~(1<<WGM02);
 
-
 TCCR0B |= (1 << CS01) | (1 << CS00); // Sets the prescalerto 64
 
 OCR0A = 250;
@@ -26,7 +25,6 @@ TCCR1A&=~(1<<WGM10);
 TCCR1A&=~(1<<WGM11);
 TCCR1A|=(1<<WGM12);
 TCCR1B&=~(1<<WGM13);
-
 
 //OCR1A=1*40000000/1024=39062.5
 //set prescaler to 1024

@@ -42,6 +42,7 @@ int main(void) {
 
   // HARDWARE INITIALIZATIONS
   initSwitchPD0();
+  
 
   while(1){
 
@@ -83,6 +84,7 @@ int main(void) {
     result = ADCL;
     result += ((unsigned int) ADCH) << 8;
     Serial.println(result);
+    changeDutyCycle(result);
   }
 
 }
