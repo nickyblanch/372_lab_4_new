@@ -52,7 +52,7 @@ int main(void) {
         break;
       case debounce_press:
         // Wait for the noisy 'debounce' state to pass. Then, we are awaiting release.
-        delayMs(1);
+        delay_Ms(1);
         button_state = wait_release;
         break;
       case wait_release:
@@ -66,14 +66,14 @@ int main(void) {
 
         for (int i = 0; i < 10; i++) {
           // TODO: Send i to seven segment display
-          delayMs(1000);
+          delay_Ms(1000);
         }
 
         // Enable the button interrupt
         EIMSK |= (1 << INT0);   // Enable INT0 in the EIMSK register
 
         // Wait for the noisy 'debounce' state to pass. Then, we are awaiting press.
-        delayMs(1);
+        delay_Ms(1);
         button_state = wait_press;
         break;
     }
