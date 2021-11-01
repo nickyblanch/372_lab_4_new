@@ -1,7 +1,7 @@
 // Author: Nick B, Nick G, Konner, Sam
 // Net ID:
-// Date:
-// Assignment:
+// Date: 11/1/21
+// Assignment:Lab 4
 //
 // Description:  Use ADC0 for reading in analog voltage value
 //----------------------------------------------------------------------//
