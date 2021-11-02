@@ -39,9 +39,16 @@ int main(void) {
 
   // VARIABLES
   unsigned int result = 0;
-
+Serial.begin(9600);
   // HARDWARE INITIALIZATIONS
   initSwitchPD0();
+  initADC0();
+  initPWMTimer3();
+  initPWMTimer4();
+  initSevenSegment();
+  initTimer0();
+  initTimer1();
+  sei();
   
 
   while(1){
@@ -66,7 +73,10 @@ int main(void) {
         EIMSK &= ~(1 << INT0);   // Disable INT0 in the EIMSK register
 
         for (int i = 0; i < 10; i++) {
+
           // TODO: Send i to seven segment display
+          changeDutyCycle(512);
+          display_number(i);
           delay_Ms(1000);
         }
 

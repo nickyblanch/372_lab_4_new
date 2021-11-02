@@ -4,8 +4,8 @@
 #include<Arduino.h>
 
 
-void intiPWMTimer4();
+void initPWMTimer4();
 void initPWMTimer3();
-void changeDutyCycle(unsigned int adc_num);
+void changeDutyCycle(unsigned short int adc_num);
 
 #endif

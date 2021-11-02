@@ -4,8 +4,8 @@
 void initPWMTimer4() {
 
     //set data direction pins
-    DDRB |= (1<<PORTH3);
-    DDRB |= (1<< PORTB7);
+    DDRH |= (1<<PORTH3);
+   
  
     //set for non inverting timer
     TCCR4A |= (1<<COM4A1);
@@ -31,13 +31,13 @@ void initPWMTimer4() {
 
 void initPWMTimer3() {
     //set data direction pins
-    DDRB |= (1<<PORTE3);
-    DDRB |= (1<< PORTB7);
+    DDRE |= (1<<PORTE3);
+    
  
-    //set for inverting timer
+    //set for non inverting timer
 
-    TCCR3A |= (1<<COM3A0);
-    TCCR3A &= ~(1<<COM3A1);
+    TCCR3A |= (1<<COM3A1);
+    TCCR3A &= ~(1<<COM3A0);
 
     //set the mode for the timer for  fast PWM 10 BIT
     TCCR3A |= (1<<WGM31);
@@ -65,13 +65,13 @@ void changeDutyCycle(unsigned short int adc_num) {
     // FIRST SCENARIO: WE ARE GOING CLOCKWISE (USE PWM ON TIMER 3)
     if (adc_num < 512) {
         // 0 represents max ramp (100% duty cycle,) and 512 represents min rmp (0% duty cycle)
-        OCR3A = 2*(1 << (0b1111111111 - adc_num));
+        OCR3A = 2*((0b1111111111 - adc_num));
         OCR4A = 0;
     }
     // SECOND SCENARIO: WE ARE GOING CLOCKWISE (USE PWM ON TIMER 3)
     else if (adc_num > 512) {
         // 0 represents max ramp (100% duty cycle,) and 512 represents min rmp (0% duty cycle)
-        OCR4A = 2*(1 << (adc_num));
+        OCR4A = 2*((adc_num));
         OCR3A = 0;
     }
     // THIRD SCENARIO: WE ARE NOT MOVING THE MOTOR

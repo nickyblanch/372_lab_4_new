@@ -1,3 +1,3 @@
 
 #include <avr/io.h>
-void initADC7();
+void initADC0();
