@@ -5,7 +5,10 @@ void initPWMTimer4() {
 
     //set data direction pins
     DDRH |= (1<<PORTH3);
+<<<<<<< Updated upstream
    
+=======
+>>>>>>> Stashed changes
  
     //set for non inverting timer
     TCCR4A |= (1<<COM4A1);
@@ -15,15 +18,12 @@ void initPWMTimer4() {
     TCCR4A |= (1<<WGM41);
     TCCR4A |= (1<<WGM40);
     TCCR4B |= (1<<WGM42);
-    TCCR4B &= (1<< WGM43);
+    TCCR4B &= ~(1<< WGM43);
 
     //set prescaler to 1
     TCCR4B|= (1<<CS40);
     TCCR4B &= ~(1<<CS41);
     TCCR4B &= ~(1<<CS42);
-
-    //initialize the output compare register to ****
-    OCR4A =251;
 
 }
 
@@ -31,33 +31,36 @@ void initPWMTimer4() {
 
 void initPWMTimer3() {
     //set data direction pins
+<<<<<<< Updated upstream
     DDRE |= (1<<PORTE3);
     
  
     //set for non inverting timer
 
+=======
+    DDRE |= (1<< DDE3);
+ 
+    //set for non-inverting timer
+>>>>>>> Stashed changes
     TCCR3A |= (1<<COM3A1);
     TCCR3A &= ~(1<<COM3A0);
 
     //set the mode for the timer for  fast PWM 10 BIT
-    TCCR3A |= (1<<WGM31);
-    TCCR3A |= (1<<WGM30);
-    TCCR3B |= (1<<WGM32);
-    TCCR3B &= (1<< WGM33);
+    TCCR3A |= ( ( 1 << COM3A1) | (1 << WGM31) | (1 << WGM30));
+    TCCR3B |= (1<< WGM32);
 
     //set prescaler to 1
     TCCR3B|= (1<<CS30);
     TCCR3B &= ~(1<<CS31);
     TCCR3B &= ~(1<<CS32);
 
-    //initialize the output compare register to ****
-    OCR3A =251;
-
+    OCR3A = 512;
 }
 
 
 
 void changeDutyCycle(unsigned short int adc_num) {
+
     // INPUT: adc_num, a 16 bit number that contains the 10-bit combination of ADCH and ADCL registers.
     // GOAL: Edit the OCRnA registers for the two 10-bit PWM timers, so that we get the correct
     // speed and direction on the DC motor.
@@ -65,13 +68,21 @@ void changeDutyCycle(unsigned short int adc_num) {
     // FIRST SCENARIO: WE ARE GOING CLOCKWISE (USE PWM ON TIMER 3)
     if (adc_num < 512) {
         // 0 represents max ramp (100% duty cycle,) and 512 represents min rmp (0% duty cycle)
+<<<<<<< Updated upstream
         OCR3A = 2*((0b1111111111 - adc_num));
+=======
+        OCR3A = 2*(0b1111111111 - adc_num);
+>>>>>>> Stashed changes
         OCR4A = 0;
     }
     // SECOND SCENARIO: WE ARE GOING CLOCKWISE (USE PWM ON TIMER 3)
     else if (adc_num > 512) {
         // 0 represents max ramp (100% duty cycle,) and 512 represents min rmp (0% duty cycle)
+<<<<<<< Updated upstream
         OCR4A = 2*((adc_num));
+=======
+        OCR4A = 2*(adc_num);
+>>>>>>> Stashed changes
         OCR3A = 0;
     }
     // THIRD SCENARIO: WE ARE NOT MOVING THE MOTOR
@@ -79,5 +90,6 @@ void changeDutyCycle(unsigned short int adc_num) {
         OCR3A = (0);
         OCR4A = 0;
     }
+    
 
 }
