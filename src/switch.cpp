@@ -23,7 +23,7 @@ void initSwitchPD0(){
 
     // Pin-Change Interrupts must be enabled for pin PD0
     // We basically want to use INT0 as a pin change interrupt
-    EICRA |= (1 << ISC00); EICRA &= (1 << ISC01); // Set INT0 to trigger asynchronously on any edge (high or low)
+    EICRA |= (1 << ISC00); EICRA &= ~(1 << ISC01); // Set INT0 to trigger asynchronously on any edge (high or low)
 
     EIMSK |= (1 << INT0);   // Enable INT0 in the EIMSK register
 }
