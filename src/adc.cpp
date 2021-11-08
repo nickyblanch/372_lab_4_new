@@ -1,4 +1,4 @@
-// Author: Nick B, Nick G, Konner, Sam
+// Author: Nick B, Nick G, Konner, Salman
 // Net ID:
 // Date: 11/1/21
 // Assignment:Lab 4
