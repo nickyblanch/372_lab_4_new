@@ -1,7 +1,6 @@
 #include <avr/io.h>
 #include "Arduino.h"
 
-
 void initSevenSegment(){
 DDRC |= (1<<DDC0) | (1<<DDC1) | (1<<DDC2) | (1<<DDC3) | (1<<DDC4) | (1<<DDC5) | (1<<DDC6);
 }
