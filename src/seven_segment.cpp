@@ -126,16 +126,3 @@ void display_number(int num)	/* Function for displaying number (0-9) */
 }
 
 
-void loop() {
-  int i;
-  for(i = 9; i>=0; i--)
-  {
-    display_number(i);
-    _delay_ms(1000);
-  }
-  for(i = 0; i<=9; i++)
-  {
-    display_number(i);
-    _delay_ms(1000);
-  }
-}
