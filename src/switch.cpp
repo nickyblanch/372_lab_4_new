@@ -18,8 +18,8 @@ void initSwitchPD0(){
     // NOTE: To set the port to input, we must 'clear' the bit by setting it to zero
     // while simultaneously preserving the other bits in the DDR register.
 
-    DDRB &= ~( 1 << DDD0);  // Clear the bit in DDRD0
-    PORTB |= (1 << PORTD0); // Enable pullup resistor by writing 1 to the port.
+    DDRD &= ~( 1 << DDD0);  // Clear the bit in DDRD0
+    PORTD |= (1 << PORTD0); // Enable pullup resistor by writing 1 to the port.
 
     // Pin-Change Interrupts must be enabled for pin PD0
     // We basically want to use INT0 as a pin change interrupt

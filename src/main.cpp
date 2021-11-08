@@ -68,7 +68,7 @@ Serial.begin(9600);
         break;
       case debounce_release:
         // The button has been released.
-
+ //delay_Ms(1);
         // Disable the button interrupt.
         EIMSK &= ~(1 << INT0);   // Disable INT0 in the EIMSK register
 
@@ -79,6 +79,7 @@ Serial.begin(9600);
           display_number(i);
           delay_Ms(1000);
         }
+        display_number(0);
 
         // Enable the button interrupt
         EIMSK |= (1 << INT0);   // Enable INT0 in the EIMSK register
